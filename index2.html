@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inmenoa S.A.S | Ingeniería y Consultoría en Obras Civiles</title>
+    <meta name="description" content="Inmenoa S.A.S - Empresa líder en ingeniería, consultoría y construcción de obras civiles en Argentina.">
+    <meta name="keywords" content="ingeniería, consultoría, obras civiles, construcción, infraestructura, Argentina, Inmenoa S.A.S">
+    <meta name="author" content="Inmenoa S.A.S">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Inmenoa S.A.S - Ingeniería y Consultoría">
+    <meta property="og:description" content="Soluciones integrales en ingeniería y construcción de obras civiles">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://inmenoa.netlify.app">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* ===== CSS COMPLETO EMBEBIDO ===== */
+        :root {
+            --primary: #2c3e50;
+            --primary-dark: #1a252f;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --shadow-1: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-2: 0 10px 30px rgba(0,0,0,0.2);
+            --shadow-3: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        .loader-3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader-cube {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 3s infinite linear;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary);
+            opacity: 0.8;
+            border: 3px solid var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--white);
+        }
+
+        .cube-face-front { transform: translateZ(40px); background: var(--secondary); }
+        .cube-face-back { transform: rotateY(180deg) translateZ(40px); background: var(--accent); }
+        .cube-face-right { transform: rotateY(90deg) translateZ(40px); background: var(--success); }
+        .cube-face-left { transform: rotateY(-90deg) translateZ(40px); background: var(--warning); }
+        .cube-face-top { transform: rotateX(90deg) translateZ(40px); background: var(--primary); }
+        .cube-face-bottom { transform: rotateX(-90deg) translateZ(40px); background: var(--dark); }
+
+        @keyframes rotateCube {
+            0% { transform: rotateX(0) rotateY(0); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        .loader-3d p {
+            color: var(--white);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            letter-spacing: 2px;
+        }
+
+        .header-3d {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+        }
+
+        .logo-svg {
+            height: 60px;
+            width: 60px;
+        }
+
+        .logo-container span {
+            color: var(--white);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-3d {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-3d {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .menu-3d a {
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 1.05rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .menu-3d a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent);
+            transition: var(--transition);
+            transform-origin: right;
+        }
+
+        .menu-3d a:hover::after {
+            width: 100%;
+            transform-origin: left;
+        }
+
+        .menu-3d a:hover {
+            color: var(--white);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            border-radius: 3px;
+        }
+
+        .hero-3d {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: var(--white);
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, var(--white), var(--light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: var(--secondary);
+        }
+
+        .hero-text {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-3d {
+            position: relative;
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            border-radius: 50px;
+            overflow: hidden;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: var(--shadow-3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+        }
+
+        .section-3d {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-dark {
+            background: linear-gradient(135deg, var(--dark), var(--primary-dark));
+            color: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+
+        .content-3d-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .gallery-item-3d {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-2);
+            height: 250px;
+            margin-bottom: 1.5rem;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .contact-card-3d,
+        .form-card-3d {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-3);
+        }
+
+        .btn-contact {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            margin: 0.5rem;
+        }
+
+        .btn-email {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-contact:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .form-group-3d {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group-3d label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group-3d input,
+        .form-group-3d textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+        }
+
+        .btn-submit-3d {
+            background: linear-gradient(45deg, var(--secondary), var(--accent));
+            color: var(--white);
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow-2);
+        }
+
+        .btn-submit-3d:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-3);
+        }
+
+        .footer-3d {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+        }
+
+        .whatsapp-float a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        @media (max-width: 968px) {
+            .content-3d-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-3d {
+                display: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn-3d {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader-3d" id="loader">
+        <div class="loader-cube">
+            <div class="cube-face cube-face-front"></div>
+            <div class="cube-face cube-face-back"></div>
+            <div class="cube-face cube-face-right"></div>
+            <div class="cube-face cube-face-left"></div>
+            <div class="cube-face cube-face-top"></div>
+            <div class="cube-face cube-face-bottom"></div>
+        </div>
+        <p>Cargando Inmenoa S.A.S...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="header-3d">
+        <div class="container">
+            <div class="logo-container">
+                <svg class="logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#2c3e50;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#3498db;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#c0392b;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M50 100 L80 60 L120 60 L150 100 L120 140 L80 140 Z" 
+                          fill="url(#grad1)" stroke="#1a252f" stroke-width="3"/>
+                    <rect x="65" y="140" width="15" height="40" fill="#2c3e50" rx="3"/>
+                    <rect x="120" y="140" width="15" height="40" fill="#2c3e50" rx="3"/>
+                    <rect x="60" y="50" width="80" height="10" fill="url(#grad2)" rx="5"/>
+                    <text x="100" y="105" font-family="Poppins, sans-serif" font-size="18" 
+                          font-weight="bold" fill="white" text-anchor="middle">INMENOA</text>
+                    <text x="100" y="122" font-family="Roboto, sans-serif" font-size="10" 
+                          fill="#ecf0f1" text-anchor="middle">S.A.S</text>
+                </svg>
+                <span>Inmenoa S.A.S</span>
+            </div>
+            <nav class="nav-3d">
+                <ul class="menu-3d">
+                    <li><a href="#quienes-somos">Quiénes Somos</a></li>
+                    <li><a href="#propuesta-valor">Propuesta de Valor</a></li>
+                    <li><a href="#ingenieria">Ingeniería Consultoría</a></li>
+                    <li><a href="#contacto">Contáctenos</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section (simplificado sin Three.js para evitar errores) -->
+    <section class="hero-3d">
+        <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,rgba(44,62,80,0.9),rgba(52,152,219,0.8));"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Soluciones Integrales en Ingeniería y Construcción</h1>
+            <h2 class="hero-subtitle">Transformando ideas en realidad con calidad y compromiso</h2>
+            <div class="hero-buttons">
+                <a href="#contacto" class="btn-3d btn-primary">Contáctanos</a>
+                <a href="#ingenieria" class="btn-3d btn-secondary">Nuestros Servicios</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiénes Somos -->
+    <section id="quienes-somos" class="section-3d">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">🏗️ Quiénes Somos</h2>
+                <p class="section-subtitle">Más de 15 años construyendo el futuro</p>
+            </div>
+            <div class="content-3d-grid">
+                <div>
+                    <h3 style="font-family:'Poppins',sans-serif;font-size:2.2rem;font-weight:700;margin-bottom:1.5rem;color:var(--primary);">Nuestra Historia</h3>
+                    <p style="margin-bottom:1.5rem;line-height:1.8;font-size:1.05rem;">
+                        <strong>Inmenoa S.A.S</strong> es una empresa argentina dedicada a la ingeniería y consultoría con más de 15 años de experiencia en el sector constructor. Nos especializamos en proyectos de infraestructura, edificaciones y obras civiles que transforman comunidades y generan desarrollo sostenible.
+                    </p>
+                    <p style="margin-bottom:1.5rem;line-height:1.8;font-size:1.05rem;">
+                        Nuestra misión es ofrecer soluciones innovadoras y sostenibles que superen las expectativas de nuestros clientes, garantizando calidad, seguridad y puntualidad en cada proyecto.
+                    </p>
+                </div>
+                <div>
+                    <div class="gallery-item-3d">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb74d66a8?w=600" alt="Obra civil" class="gallery-img">
+                    </div>
+                    <div class="gallery-item-3d">
+                        <img src="https://images.unsplash.com/photo-1565008993188-6e3bf1b7642c?w=600" alt="Estructura" class="gallery-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Propuesta de Valor -->
+    <section id="propuesta-valor" class="section-3d section-dark">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">💎 Nuestra Propuesta de Valor</h2>
+                <p class="section-subtitle">Lo que nos diferencia</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;text-align:center;">
+                <div style="padding:2rem;background:rgba(255,255,255,0.1);border-radius:15px;">
+                    <h3 style="font-size:1.6rem;margin-bottom:1rem;color:var(--secondary);">Calidad Garantizada</h3>
+                    <p>Estándares internacionales en cada proyecto</p>
+                </div>
+                <div style="padding:2rem;background:rgba(255,255,255,0.1);border-radius:15px;">
+                    <h3 style="font-size:1.6rem;margin-bottom:1rem;color:var(--accent);">Innovación Tecnológica</h3>
+                    <p>Últimas tecnologías en construcción</p>
+                </div>
+                <div style="padding:2rem;background:rgba(255,255,255,0.1);border-radius:15px;">
+                    <h3 style="font-size:1.6rem;margin-bottom:1rem;color:var(--success);">Sostenibilidad</h3>
+                    <p>Proyectos respetuosos con el medio ambiente</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ingeniería Consultoría -->
+    <section id="ingenieria" class="section-3d">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">📐 Ingeniería y Consultoría</h2>
+                <p class="section-subtitle">Servicios especializados</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.5rem;margin-top:3rem;">
+                <div class="service-card-3d" style="background:white;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-2);">
+                    <div style="height:200px;overflow:hidden;">
+                        <img src="https://images.unsplash.com/photo-1565008993188-6e3bf1b7642c?w=600" alt="Estructural" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                    <div style="padding:2rem;">
+                        <h3 style="font-family:'Poppins',sans-serif;font-size:1.8rem;margin-bottom:1rem;color:var(--primary);">Diseño Estructural</h3>
+                        <p>Análisis y diseño de estructuras en concreto, acero y mampostería</p>
+                    </div>
+                </div>
+                <div class="service-card-3d" style="background:white;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-2);">
+                    <div style="height:200px;overflow:hidden;">
+                        <img src="https://images.unsplash.com/photo-1464576564704-2274f966e889?w=600" alt="Vial" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                    <div style="padding:2rem;">
+                        <h3 style="font-family:'Poppins',sans-serif;font-size:1.8rem;margin-bottom:1rem;color:var(--primary);">Infraestructura Vial</h3>
+                        <p>Carreteras, puentes, túneles y sistemas de drenaje</p>
+                    </div>
+                </div>
+                <div class="service-card-3d" style="background:white;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-2);">
+                    <div style="height:200px;overflow:hidden;">
+                        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=600" alt="Hidráulica" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                    <div style="padding:2rem;">
+                        <h3 style="font-family:'Poppins',sans-serif;font-size:1.8rem;margin-bottom:1rem;color:var(--primary);">Sistemas Hidráulicos</h3>
+                        <p>Acueductos, alcantarillados y sistemas de riego</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contáctenos (CORREGIDO CON TUS DATOS) -->
+    <section id="contacto" class="section-3d" style="background:linear-gradient(135deg,var(--primary),var(--dark));color:white;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">📞 Contáctenos</h2>
+                <p class="section-subtitle">Estamos aquí para ayudarte</p>
+            </div>
+            <div class="content-3d-grid">
+                <div class="contact-card-3d">
+                    <h3 style="text-align:center;font-family:'Poppins',sans-serif;font-size:2rem;margin-bottom:2rem;color:var(--primary);">Información de Contacto</h3>
+                    <div style="margin-bottom:2rem;line-height:1.8;">
+                        <p><strong>📍 Ubicación:</strong> Argentina</p>
+                        <p><strong>📱 WhatsApp:</strong> <a href="https://wa.me/5493875601974" target="_blank" style="color:#25D366;text-decoration:underline;font-weight:bold;">+54 9 3875 60-1974</a></p>
+                        <p><strong>📧 Email:</strong> <a href="mailto:ventasinmenoa@gmail.com" style="color:#3498db;text-decoration:underline;font-weight:bold;">ventasinmenoa@gmail.com</a></p>
+                        <p><strong>🕒 Horario:</strong> Lunes a Viernes, 8:00 AM - 6:00 PM</p>
+                    </div>
+                    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+                        <a href="mailto:ventasinmenoa@gmail.com" class="btn-contact btn-email">
+                            <span>Enviar Email</span>
+                        </a>
+                        <a href="https://wa.me/5493875601974" class="btn-contact btn-whatsapp" target="_blank">
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="form-card-3d">
+                    <h3 style="text-align:center;font-family:'Poppins',sans-serif;font-size:2rem;margin-bottom:1.5rem;color:var(--primary);">Envíanos tu Consulta</h3>
+                    <form id="contactForm">
+                        <div class="form-group-3d">
+                            <label for="nombre">Nombre completo *</label>
+                            <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                        </div>
+                        <div class="form-group-3d">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                        </div>
+                        <div class="form-group-3d">
+                            <label for="telefono">Teléfono / WhatsApp</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="+54 9 ...">
+                        </div>
+                        <div class="form-group-3d">
+                            <label for="asunto">Asunto *</label>
+                            <input type="text" id="asunto" name="asunto" required placeholder="¿En qué podemos ayudarte?">
+                        </div>
+                        <div class="form-group-3d">
+                            <label for="mensaje">Mensaje *</label>
+                            <textarea id="mensaje" name="mensaje" rows="4" required placeholder="Cuéntanos más sobre tu proyecto..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit-3d">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-3d">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div style="text-align:center;margin-bottom:2rem;">
+                        <svg class="logo-footer" viewBox="0 0 200 200" style="height:80px;width:80px;margin:0 auto 1rem;">
+                            <path d="M50 100 L80 60 L120 60 L150 100 L120 140 L80 140 Z" 
+                                  fill="#2c3e50" stroke="#1a252f" stroke-width="2"/>
+                            <text x="100" y="105" font-family="Poppins" font-size="16" 
+                                  font-weight="bold" fill="white" text-anchor="middle">INMENOA</text>
+                        </svg>
+                        <p>Soluciones integrales en ingeniería y construcción</p>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.1);padding:1rem;border-radius:10px;text-align:center;">
+                        <p><strong>WhatsApp:</strong><br><a href="https://wa.me/5493875601974" target="_blank" style="color:#25D366;text-decoration:underline;">+54 9 3875 60-1974</a></p>
+                        <p><strong>Email:</strong><br><a href="mailto:ventasinmenoa@gmail.com" style="color:#3498db;text-decoration:underline;">ventasinmenoa@gmail.com</a></p>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:600;margin-bottom:1.5rem;color:var(--secondary);">Enlaces Rápidos</h4>
+                    <ul style="list-style:none;">
+                        <li style="margin-bottom:0.8rem;"><a href="#quienes-somos" style="color:var(--light);text-decoration:none;">Quiénes Somos</a></li>
+                        <li style="margin-bottom:0.8rem;"><a href="#propuesta-valor" style="color:var(--light);text-decoration:none;">Propuesta de Valor</a></li>
+                        <li style="margin-bottom:0.8rem;"><a href="#ingenieria" style="color:var(--light);text-decoration:none;">Servicios</a></li>
+                        <li style="margin-bottom:0.8rem;"><a href="#contacto" style="color:var(--light);text-decoration:none;">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:600;margin-bottom:1.5rem;color:var(--secondary);">Servicios</h4>
+                    <ul style="list-style:none;">
+                        <li style="margin-bottom:0.8rem;"><a href="#ingenieria" style="color:var(--light);text-decoration:none;">Diseño Estructural</a></li>
+                        <li style="margin-bottom:0.8rem;"><a href="#ingenieria" style="color:var(--light);text-decoration:none;">Infraestructura Vial</a></li>
+                        <li style="margin-bottom:0.8rem;"><a href="#ingenieria" style="color:var(--light);text-decoration:none;">Sistemas Hidráulicos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:600;margin-bottom:1.5rem;color:var(--secondary);">Argentina</h4>
+                    <p style="line-height:1.8;">
+                        📍 Argentina<br>
+                        📞 +54 9 3875 60-1974<br>
+                        ✉️ ventasinmenoa@gmail.com
+                    </p>
+                </div>
+            </div>
+            <div style="text-align:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.1);">
+                <p>&copy; 2026 Inmenoa S.A.S - Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón WhatsApp Flotante -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/5493875601974" target="_blank">
+            <svg style="width:35px;height:35px;" viewBox="0 0 24 24">
+                <path fill="white" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.226 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.493h-.004c-2.254-.001-4.498-.669-6.44-1.948-1.943-1.28-3.494-3.078-4.446-5.153-1.904-4.151-1.566-8.742.916-12.342 2.482-3.6 6.773-5.633 11.178-5.301 4.405.333 8.277 2.763 10.64 6.29 2.364 3.527 2.938 7.856 1.604 11.847-1.334 3.99-4.417 7.332-8.362 9.078-1.579.7-3.233 1.035-4.877 1.032zm-1.383-14.328c-.797-.001-1.442-.646-1.443-1.443-.001-.797.645-1.443 1.442-1.443.797 0 1.443.646 1.443 1.443 0 .797-.646 1.443-1.442 1.443z"/>
+            </svg>
+        </a>
+    </div>
+
+    <!-- Scripts (CDNs externos) -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <script>
+        // Inicialización básica (sin errores)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Loader
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+            }, 1500);
+            
+            // AOS
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ duration: 800, once: true });
+            }
+            
+            // Formulario
+            const form = document.getElementById('contactForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const nombre = document.getElementById('nombre').value;
+                    alert(`✅ ¡Gracias ${nombre}! Hemos recibido tu consulta. Te contactaremos pronto vía WhatsApp o email.`);
+                    form.reset();
+                });
+            }
+            
+            // Menú hamburguesa
+            const hamburger = document.getElementById('hamburger');
+            const menu = document.querySelector('.menu-3d');
+            if (hamburger && menu) {
+                hamburger.addEventListener('click', () => {
+                    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
